@@ -8,6 +8,29 @@ profile:
   bio: 热爱技术，喜欢折腾。专注于开源项目与工具开发，记录技术探索与日常思考。
   avatar: /images/avatar.jpg
   location: China
+  institution:
+  email:
+
+# Education
+education:
+  - school: 西湖大学
+    school_en: Westlake University
+    degree: 访问学生
+    dept: 自然语言处理实验室
+    period: 2025.12 – 2026.3
+    icon: 🔬
+  - school: 中南大学
+    school_en: Central South University
+    degree: 交换生
+    dept: 计算机学院 · 软件工程
+    period: 2023.08 – 2024.06
+    icon: 🏫
+  - school: 新疆大学
+    school_en:
+    degree: 本科在读（大三）
+    dept: 软件工程
+    period: 至今
+    icon: 🎓
 
 # Social links
 social:
@@ -15,14 +38,13 @@ social:
   email:
   twitter:
   linkedin:
+  cv:
   rss: /atom.xml
 
 # Navigation (blog section)
 menu:
   - name: 博客
     url: /blog/
-  - name: 归档
-    url: /archives/
   - name: 关于
     url: /about/
   - name: 友链

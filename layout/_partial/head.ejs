@@ -10,6 +10,24 @@
 <meta property="og:type" content="<%= page.layout === 'post' ? 'article' : 'website' %>">
 <meta property="og:url" content="<%= page.permalink || config.url %>">
 
+<!-- Prevent dark mode flash: apply theme before any rendering -->
+<script>
+(function(){
+  var t=localStorage.getItem('nova-theme');
+  var el=document.documentElement;
+  if(t) el.setAttribute('data-theme',t);
+  el.classList.add('no-transition');
+  window.addEventListener('DOMContentLoaded',function(){
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        el.classList.remove('no-transition');
+      });
+    });
+  });
+})();
+</script>
+<style>.no-transition,.no-transition *{transition:none!important;}</style>
+
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

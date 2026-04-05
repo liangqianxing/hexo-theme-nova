@@ -1,3 +1,8 @@
+<% const isHome = page.path === 'index.html' || page.path === '' %>
+<% if (isHome) { %>
+<%- partial('_partial/homepage') %>
+<% } else { %>
+<% const posts = (page.posts && page.posts.length) ? page.posts : site.posts.sort('date', -1) %>
 <div class="blog-page">
   <div class="blog-header">
     <div class="section-inner">
@@ -7,7 +12,7 @@
   </div>
   <div class="section-inner">
     <div class="post-grid">
-      <% page.posts.each(post => { %>
+      <% posts.each(post => { %>
       <article class="post-card">
         <div class="post-card-body">
           <div class="post-card-meta">
@@ -34,7 +39,7 @@
       </article>
       <% }) %>
     </div>
-
     <%- partial('_partial/pagination') %>
   </div>
 </div>
+<% } %>
