@@ -1,0 +1,11 @@
+<% if (page.total > 1) { %>
+<nav class="pagination">
+  <% if (page.prev) { %>
+  <a href="<%- url_for(page.prev_link) %>" class="pagination-btn pagination-prev">← 较新</a>
+  <% } %>
+  <span class="pagination-info"><%= page.current %> / <%= page.total %></span>
+  <% if (page.next) { %>
+  <a href="<%- url_for(page.next_link) %>" class="pagination-btn pagination-next">较旧 →</a>
+  <% } %>
+</nav>
+<% } %>

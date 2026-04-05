@@ -1,0 +1,40 @@
+<div class="blog-page">
+  <div class="blog-header">
+    <div class="section-inner">
+      <h1 class="blog-title">博客</h1>
+      <p class="blog-subtitle">记录技术与生活</p>
+    </div>
+  </div>
+  <div class="section-inner">
+    <div class="post-grid">
+      <% page.posts.each(post => { %>
+      <article class="post-card">
+        <div class="post-card-body">
+          <div class="post-card-meta">
+            <time class="post-date"><%= post.date.format('YYYY-MM-DD') %></time>
+            <% if (post.categories && post.categories.length) { %>
+            <span class="post-category"><%= post.categories.toArray()[0].name %></span>
+            <% } %>
+          </div>
+          <h2 class="post-card-title">
+            <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+          </h2>
+          <p class="post-card-excerpt"><%= post.excerpt ? strip_html(post.excerpt).substring(0, 120) : strip_html(post.content).substring(0, 120) %>...</p>
+        </div>
+        <div class="post-card-footer">
+          <% if (post.tags && post.tags.length) { %>
+          <div class="post-tags">
+            <% post.tags.toArray().slice(0, 3).forEach(tag => { %>
+            <span class="post-tag"># <%= tag.name %></span>
+            <% }) %>
+          </div>
+          <% } %>
+          <a href="<%- url_for(post.path) %>" class="post-read-more">阅读 →</a>
+        </div>
+      </article>
+      <% }) %>
+    </div>
+
+    <%- partial('_partial/pagination') %>
+  </div>
+</div>

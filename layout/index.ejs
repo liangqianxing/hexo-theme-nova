@@ -1,0 +1,107 @@
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-avatar">
+      <img src="<%- url_for(theme.profile.avatar || '/images/avatar.jpg') %>" alt="<%= theme.profile.name %>" onerror="this.src='https://ui-avatars.com/api/?name=<%= theme.profile.name %>&size=200&background=3b82f6&color=fff'">
+    </div>
+    <div class="hero-info">
+      <h1 class="hero-name">
+        <%= theme.profile.name %>
+        <% if (theme.profile.name_cn) { %><span class="hero-name-cn"><%= theme.profile.name_cn %></span><% } %>
+      </h1>
+      <p class="hero-tagline"><%= theme.profile.tagline %></p>
+      <p class="hero-bio"><%= theme.profile.bio %></p>
+      <div class="hero-meta">
+        <% if (theme.profile.location) { %>
+        <span class="hero-location">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <%= theme.profile.location %>
+        </span>
+        <% } %>
+      </div>
+      <div class="hero-social">
+        <% const social = theme.social || {} %>
+        <% if (social.github) { %>
+        <a href="<%= social.github %>" class="social-btn" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <% } %>
+        <% if (social.email) { %>
+        <a href="mailto:<%= social.email %>" class="social-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email
+        </a>
+        <% } %>
+        <% if (social.rss) { %>
+        <a href="<%- url_for(social.rss) %>" class="social-btn" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+          RSS
+        </a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% if (theme.skills && theme.skills.length) { %>
+<section class="skills-section">
+  <div class="section-inner">
+    <h2 class="section-title">技术栈</h2>
+    <div class="skills-grid">
+      <% theme.skills.forEach(group => { %>
+      <div class="skill-group">
+        <h3 class="skill-category"><%= group.category %></h3>
+        <div class="skill-tags">
+          <% group.items.forEach(item => { %>
+          <span class="skill-tag"><%= item %></span>
+          <% }) %>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<section class="recent-posts-section">
+  <div class="section-inner">
+    <div class="section-header">
+      <h2 class="section-title">最新文章</h2>
+      <a href="<%- url_for('/blog/') %>" class="section-more">查看全部 →</a>
+    </div>
+    <div class="post-grid">
+      <% site.posts.sort('date', -1).limit(6).each(post => { %>
+      <article class="post-card">
+        <div class="post-card-body">
+          <div class="post-card-meta">
+            <time class="post-date"><%= post.date.format('YYYY-MM-DD') %></time>
+            <% if (post.categories && post.categories.length) { %>
+            <span class="post-category"><%= post.categories.toArray()[0].name %></span>
+            <% } %>
+          </div>
+          <h3 class="post-card-title">
+            <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+          </h3>
+          <p class="post-card-excerpt"><%= post.excerpt ? strip_html(post.excerpt).substring(0, 100) : strip_html(post.content).substring(0, 100) %>...</p>
+        </div>
+        <div class="post-card-footer">
+          <% if (post.tags && post.tags.length) { %>
+          <div class="post-tags">
+            <% post.tags.toArray().slice(0, 3).forEach(tag => { %>
+            <span class="post-tag"># <%= tag.name %></span>
+            <% }) %>
+          </div>
+          <% } %>
+          <a href="<%- url_for(post.path) %>" class="post-read-more">阅读 →</a>
+        </div>
+      </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="blog-cta">
+  <div class="section-inner">
+    <a href="<%- url_for('/blog/') %>" class="cta-btn">进入博客 →</a>
+  </div>
+</section>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="<%= config.language || 'zh-CN' %>" data-theme="light">
+<head>
+  <%- partial('_partial/head') %>
+</head>
+<body>
+  <%- partial('_partial/nav') %>
+  <main id="main">
+    <%- body %>
+  </main>
+  <%- partial('_partial/footer') %>
+  <script src="<%- url_for('/js/nova.js') %>"></script>
+</body>
+</html>

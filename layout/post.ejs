@@ -1,0 +1,53 @@
+<div class="post-layout">
+  <article class="post-article">
+    <header class="post-header">
+      <div class="post-header-meta">
+        <time class="post-date"><%= page.date.format('YYYY-MM-DD') %></time>
+        <% if (page.categories && page.categories.length) { %>
+        <span class="post-category"><%= page.categories.toArray()[0].name %></span>
+        <% } %>
+        <% if (theme.reading_time) { %>
+        <span class="post-reading-time"><%= Math.ceil(page.content.replace(/<[^>]+>/g, '').length / 300) %> 分钟阅读</span>
+        <% } %>
+      </div>
+      <h1 class="post-title"><%= page.title %></h1>
+      <% if (page.tags && page.tags.length) { %>
+      <div class="post-tags">
+        <% page.tags.toArray().forEach(tag => { %>
+        <a href="<%- url_for(tag.path) %>" class="post-tag"># <%= tag.name %></a>
+        <% }) %>
+      </div>
+      <% } %>
+    </header>
+
+    <div class="post-content">
+      <%- page.content %>
+    </div>
+
+    <footer class="post-footer">
+      <div class="post-nav">
+        <% if (page.prev) { %>
+        <a href="<%- url_for(page.prev.path) %>" class="post-nav-item post-nav-prev">
+          <span class="post-nav-label">← 上一篇</span>
+          <span class="post-nav-title"><%= page.prev.title %></span>
+        </a>
+        <% } %>
+        <% if (page.next) { %>
+        <a href="<%- url_for(page.next.path) %>" class="post-nav-item post-nav-next">
+          <span class="post-nav-label">下一篇 →</span>
+          <span class="post-nav-title"><%= page.next.title %></span>
+        </a>
+        <% } %>
+      </div>
+    </footer>
+  </article>
+
+  <% if (theme.toc) { %>
+  <aside class="post-toc" id="toc">
+    <div class="toc-inner">
+      <h4 class="toc-title">目录</h4>
+      <%- toc(page.content, { list_number: false }) %>
+    </div>
+  </aside>
+  <% } %>
+</div>

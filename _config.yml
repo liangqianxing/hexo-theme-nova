@@ -1,0 +1,43 @@
+# Nova Theme Configuration
+
+# Profile (shown on homepage)
+profile:
+  name: Gu EnHao
+  name_cn: 古恩豪
+  tagline: Developer & Open Source Enthusiast
+  bio: 热爱技术，喜欢折腾。专注于开源项目与工具开发，记录技术探索与日常思考。
+  avatar: /images/avatar.jpg
+  location: China
+
+# Social links
+social:
+  github: https://github.com/liangqianxing
+  email:
+  twitter:
+  linkedin:
+  rss: /atom.xml
+
+# Navigation (blog section)
+menu:
+  - name: 博客
+    url: /blog/
+  - name: 归档
+    url: /archives/
+  - name: 关于
+    url: /about/
+  - name: 友链
+    url: /links/
+
+# Skills shown on homepage
+skills:
+  - category: 前端
+    items: [HTML, CSS, JavaScript, TypeScript]
+  - category: 后端
+    items: [Node.js, Python]
+  - category: 工具链
+    items: [Git, GitHub Actions, Docker, Linux]
+
+# Theme settings
+dark_mode: true   # enable dark mode toggle
+toc: true         # table of contents in posts
+reading_time: true

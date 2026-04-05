@@ -1,0 +1,22 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><% if (page.title) { %><%= page.title %> | <%= config.title %><% } else { %><%= config.title %><% } %></title>
+<meta name="description" content="<%= page.description || config.description %>">
+<meta name="author" content="<%= config.author %>">
+
+<!-- Open Graph -->
+<meta property="og:title" content="<%= page.title || config.title %>">
+<meta property="og:description" content="<%= page.description || config.description %>">
+<meta property="og:type" content="<%= page.layout === 'post' ? 'article' : 'website' %>">
+<meta property="og:url" content="<%= page.permalink || config.url %>">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Styles -->
+<link rel="stylesheet" href="<%- url_for('/css/nova.css') %>">
+
+<!-- Favicon -->
+<link rel="icon" href="<%- url_for('/images/favicon.ico') %>" type="image/x-icon">
