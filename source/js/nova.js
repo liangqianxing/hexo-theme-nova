@@ -34,10 +34,31 @@
     }, { passive: true });
   }
 
-  // Highlight active TOC link on scroll
-  const tocLinks = document.querySelectorAll('.post-toc .toc a');
-  if (tocLinks.length) {
+  // Build TOC dynamically from actual heading IDs in the page
+  function buildToc() {
+    const tocList = document.getElementById('tocList');
+    if (!tocList) return;
     const headings = Array.from(document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3'));
+    if (!headings.length) return;
+
+    headings.forEach(h => {
+      // id may be on the heading itself or on an inner <span>
+      const idEl = h.id ? h : h.querySelector('[id]');
+      if (!idEl) return;
+      const id = idEl.id;
+      const level = parseInt(h.tagName[1]);
+      const li = document.createElement('li');
+      li.className = `toc-item toc-level-${level}`;
+      const a = document.createElement('a');
+      a.className = 'toc-link';
+      a.href = '#' + id;
+      a.textContent = h.textContent.trim();
+      li.appendChild(a);
+      tocList.appendChild(li);
+    });
+
+    // Highlight active on scroll
+    const tocLinks = tocList.querySelectorAll('a');
     const onScroll = () => {
       const scrollY = window.scrollY + 100;
       let active = headings[0];
@@ -46,11 +67,20 @@
       }
       tocLinks.forEach(a => a.classList.remove('active'));
       if (active) {
-        const match = document.querySelector(`.post-toc .toc a[href="#${CSS.escape(active.id)}"]`);
-        if (match) match.classList.add('active');
+        const idEl = active.id ? active : active.querySelector('[id]');
+        if (idEl) {
+          const match = tocList.querySelector(`a[href="#${CSS.escape(idEl.id)}"]`);
+          if (match) match.classList.add('active');
+        }
       }
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', buildToc);
+  } else {
+    buildToc();
   }
 })();

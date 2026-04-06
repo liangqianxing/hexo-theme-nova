@@ -109,9 +109,9 @@
     <section class="ac-section" id="education">
       <h2 class="ac-section-title">教育经历</h2>
       <div class="ac-edu-list">
-        <% theme.education.forEach(edu => { %>
-        <div class="ac-edu-item">
-          <div class="ac-edu-icon"><%= edu.icon || '🎓' %></div>
+        <% const eduList = Array.isArray(theme.education) ? theme.education : [] %>
+        <% eduList.forEach(function(edu) { %>
+        <div class="ac-edu-item" data-dump="<%= String(edu) %>" data-school="<%= edu.school %>" data-logo="<%= edu.school_logo %>">
           <div class="ac-edu-body">
             <div class="ac-edu-header">
               <span class="ac-edu-school"><%= edu.school %></span>
@@ -136,7 +136,7 @@
         <% site.posts.sort('date', -1).limit(5).each(post => { %>
         <div class="ac-post-item">
           <div class="ac-post-meta">
-            <time class="ac-post-date"><%= post.date.format('YYYY-MM-DD') %></time>
+            <time class="ac-post-date"><%- date(post.date, 'YYYY年M月D日') %></time>
             <% if (post.categories && post.categories.length) { %>
             <span class="ac-post-cat"><%= post.categories.toArray()[0].name %></span>
             <% } %>

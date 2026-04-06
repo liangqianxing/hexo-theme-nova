@@ -2,7 +2,7 @@
   <article class="post-article">
     <header class="post-header">
       <div class="post-header-meta">
-        <time class="post-date"><%= page.date.format('YYYY-MM-DD') %></time>
+        <time class="post-date"><%- date(page.date, 'YYYY年M月D日') %></time>
         <% if (page.categories && page.categories.length) { %>
         <span class="post-category"><%= page.categories.toArray()[0].name %></span>
         <% } %>
@@ -46,7 +46,7 @@
   <aside class="post-toc" id="toc">
     <div class="toc-inner">
       <h4 class="toc-title">目录</h4>
-      <%- toc(page.content, { list_number: false }) %>
+      <ol class="toc" id="tocList"></ol>
     </div>
   </aside>
   <% } %>
