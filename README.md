@@ -19,6 +19,14 @@ A modern Hexo theme that combines an **academic personal homepage** with a **blo
 
 > Live demo: [liangqianxing.github.io](https://liangqianxing.github.io)
 
+| Homepage (Light) | Homepage (Dark) |
+|:---:|:---:|
+| ![Homepage Light](screenshots/homepage-light.png) | ![Homepage Dark](screenshots/homepage-dark.png) |
+
+| Blog List | Post Detail |
+|:---:|:---:|
+| ![Blog List](screenshots/blog-list.png) | ![Post Detail](screenshots/post-detail.png) |
+
 ## Installation
 
 ```bash
